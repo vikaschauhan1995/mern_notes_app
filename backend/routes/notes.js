@@ -1,39 +1,29 @@
 const express = require('express');
-const Note = require('../models/notesModel');
+const {
+  createNote,
+  getNotes,
+  getNote,
+  deleteNote,
+  updateNote
+} = require('../controllers/noteController');
 const { TITLE, DESCRIPTION } = require('../models/notesModel/const.js');
 
 const router = express.Router();
 
 // get all the notes
-router.get('/', (req, res) => {
-  res.json({ message: 'Gell all the notes' });
-});
+router.get('/', getNotes);
 
 // get a single note
-router.get('/:id', (req, res) => {
-  res.json({ message: 'Get a single note' });
-});
+router.get('/:id', getNote);
 
 // Post a new note
-router.post('/', async (req, res) => {
-  const { title, description } = req.body;
-  try {
-    const note = await Note.create({ title, description });
-    res.status(200).json(note);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+router.post('/', createNote);
 
 // Delete a note
-router.delete('/:id', (req, res) => {
-  res.json({ message: 'Delete a note' });
-});
+router.delete('/:id', deleteNote);
 
 // Update a note
-router.patch('/:id', (req, res) => {
-  res.json({ message: 'Update a note' });
-});
+router.patch('/:id', updateNote);
 
 
 module.exports = router;
