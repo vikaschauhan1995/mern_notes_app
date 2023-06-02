@@ -1,5 +1,6 @@
-
 const express = require('express');
+const Note = require('../models/notesModel');
+const { TITLE, DESCRIPTION } = require('../models/notesModel/const.js');
 
 const router = express.Router();
 
@@ -14,8 +15,14 @@ router.get('/:id', (req, res) => {
 });
 
 // Post a new note
-router.post('/', (req, res) => {
-  res.json({ message: 'Post a new note' });
+router.post('/', async (req, res) => {
+  const { title, description } = req.body;
+  try {
+    const note = await Note.create({ title, description });
+    res.status(200).json(note);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 // Delete a note
