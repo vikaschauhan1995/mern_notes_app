@@ -1,20 +1,29 @@
 require('dotenv').config({ path: './.env' });
 const express = require('express');
+const mongoose = require('mongoose');
+const notesRouter = require('./routes/notes.js');
 
 
 // express app
 const app = express();
+
+//middleware
+app.use(express.json());
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the app!' });
-});
+// routes
+app.use('/api/notes', notesRouter);
 
-// listen for request
-app.listen(process.env.PORT, () => {
-  console.log('listen on port 8000!');
+// connect to db
+mongoose.connect(process.env.MONGO_DB).then(() => {
+  // listen for request
+  app.listen(process.env.PORT, () => {
+    console.log(`Connected to mongodb & listening to the port ${process.env.PORT}`);
+  });
+}).catch((err) => {
+  console.log(err);
 });
