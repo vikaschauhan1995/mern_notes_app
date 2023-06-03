@@ -4,24 +4,24 @@ import { fetchNotesAction } from '../redux/Note/actions';
 import { NOTES_REDUCER } from '../redux/Note/constants';
 import { NOTES_LIST } from '../redux/Note/constants';
 import NoteDetails from '../components/NoteDetails';
+import NoteForm from '../components/NoteForm';
 
 const Home = () => {
   const dispatch = useDispatch();
   const notesState = useSelector(state => state[NOTES_REDUCER]);
   const notesList = notesState?.[NOTES_LIST]
-  console.log("notesList=>", notesList);
 
   useEffect(() => {
     dispatch(fetchNotesAction());
   }, []);
   return (
     <div>
+      <NoteForm />
       <div>
         {notesList && notesList.map(note =>
           <NoteDetails key={note._id} note={note} />
         )}
       </div>
-      ff
     </div>
   )
 }
