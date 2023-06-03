@@ -1,5 +1,5 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { FETCH_NOTES, SET_NOTES, POST_NOTE, SET_POST_NOTE_ERROR } from './constants';
+import { FETCH_NOTES, SET_NOTES, POST_NOTE, SET_POST_NOTE_ERROR, ADD_NEW_NOTE } from './constants';
 
 
 function* fetchNotes() {
@@ -26,13 +26,13 @@ function* postNote(params) {
     });
     const json = yield response.json();
     if (!response?.ok) {
-      yield put({ type: SET_POST_NOTE_ERROR });
+      yield put({ type: SET_POST_NOTE_ERROR, payload: json?.error });
     }
     if (response?.ok) {
-      yield put({ type: FETCH_NOTES });
+      yield put({ type: ADD_NEW_NOTE, payload: json });
     }
   } catch (error) {
-    yield put({ type: SET_POST_NOTE_ERROR });
+    yield put({ type: SET_POST_NOTE_ERROR, payload: error?.message });
   }
 }
 

@@ -7,10 +7,11 @@ import { postNoteAction } from '../redux/Note/actions';
 const NoteForm = () => {
   const dispatch = useDispatch();
   const noteReducerState = useSelector(state => state[NOTES_REDUCER]);
-  const [state, setState] = useState({
+  const initialState = {
     [NOTE_TITLE]: '',
     [NOTE_DESCRIPTION]: ''
-  });
+  };
+  const [state, setState] = useState(initialState);
   console.log("noteReducerState=>", noteReducerState);
   const handleChange = (e) => {
     const value = e.target.value;
@@ -28,6 +29,7 @@ const NoteForm = () => {
       [NOTE_DESCRIPTION]: state[NOTE_DESCRIPTION]
     };
     dispatch(postNoteAction(note));
+    setState(initialState);
   }
   return (
     <div>
@@ -39,7 +41,7 @@ const NoteForm = () => {
         <br />
         <label>Description:</label>
         <input type="text" name={NOTE_DESCRIPTION} onChange={handleChange} value={state[NOTE_DESCRIPTION]} />
-        {noteReducerState[POST_NOTE_RESPONSE_ERROR] && <p className="text-red">Couldn't post the note</p>}
+        {noteReducerState[POST_NOTE_RESPONSE_ERROR] && <p className="text-red">{noteReducerState[POST_NOTE_RESPONSE_ERROR]}</p>}
         <br />
         <button>Add Note</button>
       </form>

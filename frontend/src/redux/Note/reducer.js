@@ -1,4 +1,4 @@
-import { SET_NOTES, NOTES_LIST, POST_NOTE_RESPONSE_ERROR, SET_POST_NOTE_ERROR } from './constants.js';
+import { SET_NOTES, NOTES_LIST, POST_NOTE_RESPONSE_ERROR, SET_POST_NOTE_ERROR, ADD_NEW_NOTE } from './constants.js';
 
 const initialState = {
   [NOTES_LIST]: null,
@@ -10,8 +10,9 @@ export const reducer = (state = initialState, action) => {
     case SET_NOTES:
       return { ...state, [NOTES_LIST]: action.payload };
     case SET_POST_NOTE_ERROR:
-      console.log("POST_NOTE_RESPONSE_ERROR");
-      return { ...state, [POST_NOTE_RESPONSE_ERROR]: true };
+      return { ...state, [POST_NOTE_RESPONSE_ERROR]: action.payload };
+    case ADD_NEW_NOTE:
+      return { ...state, [NOTES_LIST]: [action.payload, ...state[NOTES_LIST]] };
     default:
       return state;
   }
