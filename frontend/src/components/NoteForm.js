@@ -12,7 +12,6 @@ const NoteForm = () => {
     [NOTE_DESCRIPTION]: ''
   };
   const [state, setState] = useState(initialState);
-  console.log("noteReducerState=>", noteReducerState);
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -49,4 +48,4 @@ const NoteForm = () => {
   )
 }
 
-export default NoteForm
+export default NoteForm;
