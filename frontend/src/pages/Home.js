@@ -13,7 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchNotesAction());
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       <NoteForm />
