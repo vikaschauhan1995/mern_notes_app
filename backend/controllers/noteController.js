@@ -57,7 +57,7 @@ const deleteNote = async (req, res) => {
     if (!note) {
       return res.status(404).json({ error: 'Note not found' });
     }
-    res.status(400).json(note);
+    res.status(200).json(note);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

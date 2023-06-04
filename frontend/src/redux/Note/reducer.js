@@ -1,4 +1,4 @@
-import { SET_NOTES, NOTES_LIST, POST_NOTE_RESPONSE_ERROR, SET_POST_NOTE_ERROR, ADD_NEW_NOTE } from './constants.js';
+import { SET_NOTES, NOTES_LIST, POST_NOTE_RESPONSE_ERROR, SET_POST_NOTE_ERROR, ADD_NEW_NOTE, DELETE_NOTE_FROM_LIST } from './constants.js';
 
 const initialState = {
   [NOTES_LIST]: null,
@@ -13,6 +13,13 @@ export const reducer = (state = initialState, action) => {
       return { ...state, [POST_NOTE_RESPONSE_ERROR]: action.payload };
     case ADD_NEW_NOTE:
       return { ...state, [NOTES_LIST]: [action.payload, ...state[NOTES_LIST]] };
+    case DELETE_NOTE_FROM_LIST:
+      const newList = state[NOTES_LIST].filter(note => {
+        if (note._id !== action?.payload?._id) {
+          return note;
+        }
+      });
+      return { ...state, [NOTES_LIST]: newList };
     default:
       return state;
   }

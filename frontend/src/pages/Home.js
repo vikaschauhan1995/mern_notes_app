@@ -19,7 +19,7 @@ const Home = () => {
       <NoteForm />
       <div>
         {notesList && notesList.map(note =>
-          <NoteDetails key={note._id} note={note} />
+          <NoteDetails key={note?._id} note={note} />
         )}
       </div>
     </div>
