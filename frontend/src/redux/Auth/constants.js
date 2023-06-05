@@ -8,8 +8,8 @@ export const LOGIN_ACTION = 'loginAction';
 export const SET_LOGIN_ERROR = 'setLoginError';
 export const SET_USER = 'setUser';
 
-export const SET_LOADING = 'setLoading';
-export const IS_LOADING = 'isLoading';
+export const SET_LOGIN_LOADING = 'setLoginLoading';
+export const IS_LOGIN_LOADING = 'isLoginLoading';
 
 export const LOGIN_ERROR = 'loginError';
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EMAIL, PASSWORD, AUTH_REDUCER, IS_LOADING, LOGIN_ERROR } from '../redux/Auth/constants';
+import { EMAIL, PASSWORD, AUTH_REDUCER, IS_LOGIN_LOADING, LOGIN_ERROR } from '../redux/Auth/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../redux/Auth/actions';
 
@@ -37,7 +37,7 @@ const Login = () => {
         <br />
         <label>Password:</label>
         <input type="password" name={PASSWORD} onChange={handleChange} value={state[PASSWORD]} />
-        <button disabled={authState[IS_LOADING]}>{authState[IS_LOADING] ? "Loading..." : "Login"}</button>
+        <button disabled={authState[IS_LOGIN_LOADING]}>{authState[IS_LOGIN_LOADING] ? "Loading..." : "Login"}</button>
       </form>
       {authState[LOGIN_ERROR] && <div>{authState[LOGIN_ERROR]}</div>}
     </div>

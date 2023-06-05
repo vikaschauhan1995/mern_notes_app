@@ -1,17 +1,17 @@
 import {
-  USER, SET_LOGIN_ERROR, LOGIN_ERROR, SET_USER, SET_LOADING, IS_LOADING,
+  USER, SET_LOGIN_ERROR, LOGIN_ERROR, SET_USER, SET_LOGIN_LOADING, IS_LOGIN_LOADING,
   SET_SIGNUP_LOADING, IS_SIGNUP_LOADING, SET_SIGNUP_ERROR, SIGNUP_ERROR
 } from './constants';
 
 const initialState = {
   [USER]: null,
-  [IS_LOADING]: false,
+  [IS_LOGIN_LOADING]: false,
   [LOGIN_ERROR]: null
 }
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_LOADING:
-      return { ...state, [IS_LOADING]: action.payload }
+    case SET_LOGIN_LOADING:
+      return { ...state, [IS_LOGIN_LOADING]: action.payload }
     case SET_LOGIN_ERROR:
       return { ...state, [LOGIN_ERROR]: action.payload };
     case SET_USER:

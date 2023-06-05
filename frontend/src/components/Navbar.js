@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../redux/Auth/actions';
+import { USER, AUTH_REDUCER, EMAIL } from '../redux/Auth/constants';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const authState = useSelector(state => state[AUTH_REDUCER]);
   const logout = () => {
     dispatch(logoutAction());
   }
@@ -15,13 +17,20 @@ const Navbar = () => {
           <h2>Notes</h2>
         </Link>
         <nav>
-          <div>
-            <button onClick={logout}>Logout</button>
-          </div>
-          <div>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-          </div>
+          {authState?.[USER] && (
+            <div>
+              <span>{authState?.[USER][EMAIL]}</span>
+              <button onClick={logout}>Logout</button>
+            </div>
+          )}
+          {
+            !authState?.[USER] && (
+              <div>
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Signup</Link>
+              </div>
+            )
+          }
         </nav>
       </div>
     </header>
