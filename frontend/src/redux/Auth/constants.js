@@ -12,3 +12,5 @@ export const SET_LOADING = 'setLoading';
 export const IS_LOADING = 'isLoading';
 
 export const LOGIN_ERROR = 'loginError';
+
+export const LOGOUT_ACTION = 'logoutAction';

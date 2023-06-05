@@ -1,5 +1,6 @@
-import { takeLatest, put } from 'redux-saga/effects';
-import { LOGIN_ACTION, SET_LOGIN_ERROR, SET_USER, SET_LOADING } from './constants';
+import { takeLatest, put, take } from 'redux-saga/effects';
+import { LOGIN_ACTION, SET_LOGIN_ERROR, SET_USER, SET_LOADING, USER, LOGOUT_ACTION } from './constants';
+import { logoutAction } from './actions';
 
 
 function* sendUserToLogin(params) {
@@ -19,7 +20,7 @@ function* sendUserToLogin(params) {
     if (response.ok) {
       // save user to localStorage
       const userToJSON = JSON.stringify(json);
-      localStorage.setItem('user', userToJSON);
+      localStorage.setItem([USER], userToJSON);
       // update the auth context
       yield put({ type: SET_USER, payload: json });
       yield put({ type: SET_LOADING, payload: false });
@@ -30,7 +31,17 @@ function* sendUserToLogin(params) {
   }
 }
 
+function* logout() {
+  try {
+    localStorage.clear(USER);
+    yield put({ type: SET_USER, payload: null });
+  } catch (error) {
+    console.log("error: ", error.message);
+  }
+}
+
 
 export default function* saga() {
   yield takeLatest(LOGIN_ACTION, sendUserToLogin);
+  yield takeLatest(LOGOUT_ACTION, logout);
 }
