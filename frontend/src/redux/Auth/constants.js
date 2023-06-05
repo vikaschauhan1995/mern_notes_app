@@ -14,3 +14,9 @@ export const IS_LOADING = 'isLoading';
 export const LOGIN_ERROR = 'loginError';
 
 export const LOGOUT_ACTION = 'logoutAction';
+
+export const SIGNUP_ACTION = 'signupAction';
+export const SET_SIGNUP_LOADING = 'setSignupLoading';
+export const IS_SIGNUP_LOADING = 'isSignupLoading';
+export const SET_SIGNUP_ERROR = 'setSignupError';
+export const SIGNUP_ERROR = 'signupError';
