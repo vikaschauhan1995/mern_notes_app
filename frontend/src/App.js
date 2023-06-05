@@ -8,11 +8,18 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import { useEffect } from 'react';
+import { USER } from './redux/Auth/constants';
+import { setUser } from './redux/Auth/actions';
 
 function App() {
   const dispatch = useDispatch();
-  const appReducerState = useSelector(state => state);
-  // console.log(appReducerState);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem(USER));
+    if (user) {
+      dispatch(setUser(user));
+    }
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
