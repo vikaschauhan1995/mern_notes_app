@@ -1,12 +1,22 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { FETCH_NOTES, SET_NOTES, POST_NOTE, SET_POST_NOTE_ERROR, ADD_NEW_NOTE, DELETE_NOTE_FROM_DB, DELETE_NOTE_FROM_LIST } from './constants';
+import { FETCH_NOTES, SET_NOTES, POST_NOTE, SET_POST_NOTE_ERROR, ADD_NEW_NOTE, DELETE_NOTE_FROM_DB, DELETE_NOTE_FROM_LIST, SET_FETCH_NOTES_ERROR } from './constants';
+import { USER } from '../Auth/constants';
+import { getDataFromLocalStorage } from '../../utils/getDataFromLocalStorage';
 
 
 function* fetchNotes() {
   try {
-    const response = yield fetch('http://localhost:8000/api/notes/');
+    const { token } = JSON.parse(getDataFromLocalStorage(USER));
+    const response = yield fetch('http://localhost:8000/api/notes/', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     const notes = yield response.json();
-    if (response.ok) {
+    if (notes?.error) {
+      yield put({ type: SET_FETCH_NOTES_ERROR, payload: notes?.error });
+    } else if (response.ok) {
       yield put({ type: SET_NOTES, payload: notes });
     }
   } catch (error) {

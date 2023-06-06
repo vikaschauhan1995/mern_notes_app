@@ -7,8 +7,11 @@ const {
   updateNote
 } = require('../controllers/noteController');
 const { TITLE, DESCRIPTION } = require('../models/notesModel/const.js');
+const authMiddleware = require('../middleware/auth');
 
 const router = express.Router();
+
+router.use(authMiddleware);
 
 // get all the notes
 router.get('/', getNotes);

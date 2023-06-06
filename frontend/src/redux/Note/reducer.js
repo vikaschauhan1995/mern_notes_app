@@ -1,14 +1,17 @@
-import { SET_NOTES, NOTES_LIST, POST_NOTE_RESPONSE_ERROR, SET_POST_NOTE_ERROR, ADD_NEW_NOTE, DELETE_NOTE_FROM_LIST } from './constants.js';
+import { SET_NOTES, NOTES_LIST, POST_NOTE_RESPONSE_ERROR, SET_POST_NOTE_ERROR, ADD_NEW_NOTE, DELETE_NOTE_FROM_LIST, FETCH_NOTES_ERROR, SET_FETCH_NOTES_ERROR } from './constants.js';
 
 const initialState = {
   [NOTES_LIST]: null,
-  [POST_NOTE_RESPONSE_ERROR]: null
+  [POST_NOTE_RESPONSE_ERROR]: null,
+  [FETCH_NOTES_ERROR]: null
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_NOTES:
       return { ...state, [NOTES_LIST]: action.payload };
+    case SET_FETCH_NOTES_ERROR:
+      return { ...state, [FETCH_NOTES_ERROR]: action.payload };
     case SET_POST_NOTE_ERROR:
       return { ...state, [POST_NOTE_RESPONSE_ERROR]: action.payload };
     case ADD_NEW_NOTE:

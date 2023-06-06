@@ -1,6 +1,8 @@
 export const NOTES_REDUCER = 'notesReducer';
 
 export const FETCH_NOTES = 'fetchNotes';
+export const SET_FETCH_NOTES_ERROR = 'setFetchNotesError';
+export const FETCH_NOTES_ERROR = 'fetchNotesError';
 export const SET_NOTES = 'setNotes';
 export const NOTES_LIST = 'notesList'
 
