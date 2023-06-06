@@ -2,21 +2,18 @@ import { takeLatest, put } from 'redux-saga/effects';
 import { FETCH_NOTES, SET_NOTES, POST_NOTE, SET_POST_NOTE_ERROR, ADD_NEW_NOTE, DELETE_NOTE_FROM_DB, DELETE_NOTE_FROM_LIST, SET_FETCH_NOTES_ERROR } from './constants';
 import { USER } from '../Auth/constants';
 import { getDataFromLocalStorage } from '../../utils/getDataFromLocalStorage';
+import request from '../../utils/request';
 
 
 function* fetchNotes() {
   try {
-    const { token } = JSON.parse(getDataFromLocalStorage(USER));
-    const response = yield fetch('http://localhost:8000/api/notes/', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
+    const response = yield request('GET', 'http://localhost:8000/api/notes/');
+    // console.log("response=>>", response);
     const notes = yield response.json();
-    if (notes?.error) {
-      yield put({ type: SET_FETCH_NOTES_ERROR, payload: notes?.error });
-    } else if (response.ok) {
+    if (response?.error) {
+      yield put({ type: SET_FETCH_NOTES_ERROR, payload: response?.error });
+    }
+    if (response.ok) {
       yield put({ type: SET_NOTES, payload: notes });
     }
   } catch (error) {
@@ -27,13 +24,7 @@ function* fetchNotes() {
 function* postNote(params) {
   try {
     const note = yield params?.payload;
-    const response = yield fetch('http://localhost:8000/api/notes/', {
-      method: 'POST',
-      body: JSON.stringify(note),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    const response = yield request('POST', 'http://localhost:8000/api/notes/', note)
     const json = yield response.json();
     if (!response?.ok) {
       yield put({ type: SET_POST_NOTE_ERROR, payload: json?.error });
@@ -49,10 +40,7 @@ function* postNote(params) {
 function* deleteNote(params) {
   try {
     const id = params?.payload;
-    const response = yield fetch(`http://localhost:8000/api/notes/${id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
-    });
+    const response = yield request('DELETE', `http://localhost:8000/api/notes/${id}`)
     const json = yield response.json();
     if (!response?.ok) {
       console.log('There is an error while deleting note');

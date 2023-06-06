@@ -10,6 +10,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const notesState = useSelector(state => state[NOTES_REDUCER]);
   const notesList = notesState?.[NOTES_LIST]
+  console.log("notesState", notesState);
   useEffect(() => {
     dispatch(fetchNotesAction());
   }, [dispatch]);
@@ -18,8 +19,8 @@ const Home = () => {
       <NoteForm />
       <div>
         {notesState[FETCH_NOTES_ERROR] && <div>{notesState[FETCH_NOTES_ERROR]}</div>}
-        {notesList && notesList.map(note =>
-          <NoteDetails key={note?._id} note={note} />
+        {notesList && notesList.map((note, index) =>
+          <NoteDetails key={note?._id + index} note={note} />
         )}
       </div>
     </div>
