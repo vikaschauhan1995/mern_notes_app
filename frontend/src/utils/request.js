@@ -14,7 +14,6 @@ const request = async (method, url, body = {}) => {
   if (method === 'GET' || method === 'DELETE') {
     delete requestInfo.body;
   }
-  console.log("requestInfo===>>", requestInfo);
   const response = await fetch(url, requestInfo);
   // const json = await response.json();
   return response;

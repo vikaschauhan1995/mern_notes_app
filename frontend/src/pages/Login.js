@@ -17,7 +17,6 @@ const Login = () => {
       [PASSWORD]: state[PASSWORD]
     }
     dispatch((loginAction(user)));
-    console.log('user=>', user);
   }
   const handleChange = (e) => {
     const value = e.target.value;

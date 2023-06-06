@@ -1,9 +1,10 @@
 import { takeLatest, put, take } from 'redux-saga/effects';
 import {
   LOGIN_ACTION, SET_LOGIN_ERROR, SET_USER, SET_LOGIN_LOADING, USER, LOGOUT_ACTION,
-  SET_SIGNUP_LOADING, SIGNUP_ACTION, SET_SIGNUP_ERROR
+  SET_SIGNUP_LOADING, SIGNUP_ACTION, SET_SIGNUP_ERROR, SET_AUTH_REDUCER_TO_INITIAL_STATE
 } from './constants';
 import { logoutAction } from './actions';
+import { SET_NOTES_REDUCER_TO_INITIAL_STATE } from '../Note/constants';
 
 
 function* sendUserToLogin(params) {
@@ -65,7 +66,8 @@ function* signup(params) {
 function* logout() {
   try {
     localStorage.clear(USER);
-    yield put({ type: SET_USER, payload: null });
+    yield put({ type: SET_AUTH_REDUCER_TO_INITIAL_STATE });
+    yield put({ type: SET_NOTES_REDUCER_TO_INITIAL_STATE });
   } catch (error) {
     console.log("error: ", error.message);
   }

@@ -20,3 +20,6 @@ export const SET_SIGNUP_LOADING = 'setSignupLoading';
 export const IS_SIGNUP_LOADING = 'isSignupLoading';
 export const SET_SIGNUP_ERROR = 'setSignupError';
 export const SIGNUP_ERROR = 'signupError';
+
+
+export const SET_AUTH_REDUCER_TO_INITIAL_STATE = 'setAuthReducerToInitialState';

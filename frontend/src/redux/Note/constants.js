@@ -15,3 +15,5 @@ export const POST_NOTE_RESPONSE_ERROR = 'postNoteResponseError';
 
 export const NOTE_TITLE = 'title';
 export const NOTE_DESCRIPTION = 'description';
+
+export const SET_NOTES_REDUCER_TO_INITIAL_STATE = 'setNoteReducerInitialState';

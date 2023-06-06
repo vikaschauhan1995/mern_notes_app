@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { TITLE, DESCRIPTION } = require('./const');
+const { TITLE, DESCRIPTION, USER_ID } = require('./const');
 
 const Schema = mongoose.Schema;
 
@@ -11,6 +11,10 @@ const notesSchema = new Schema({
   [DESCRIPTION]: {
     type: String,
     required: true,
+  },
+  [USER_ID]: {
+    type: String,
+    required: true
   }
 }, {
   timestamps: true

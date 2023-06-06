@@ -1,4 +1,4 @@
-import { SET_NOTES, NOTES_LIST, POST_NOTE_RESPONSE_ERROR, SET_POST_NOTE_ERROR, ADD_NEW_NOTE, DELETE_NOTE_FROM_LIST, FETCH_NOTES_ERROR, SET_FETCH_NOTES_ERROR } from './constants.js';
+import { SET_NOTES, NOTES_LIST, POST_NOTE_RESPONSE_ERROR, SET_POST_NOTE_ERROR, ADD_NEW_NOTE, DELETE_NOTE_FROM_LIST, FETCH_NOTES_ERROR, SET_FETCH_NOTES_ERROR, SET_NOTES_REDUCER_TO_INITIAL_STATE } from './constants.js';
 
 const initialState = {
   [NOTES_LIST]: null,
@@ -23,6 +23,8 @@ export const reducer = (state = initialState, action) => {
         }
       });
       return { ...state, [NOTES_LIST]: newList };
+    case SET_NOTES_REDUCER_TO_INITIAL_STATE:
+      return initialState;
     default:
       return state;
   }

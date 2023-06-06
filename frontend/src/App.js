@@ -15,7 +15,6 @@ import { setUser } from './redux/Auth/actions';
 function App() {
   const dispatch = useDispatch();
   const state = useSelector(state => state[AUTH_REDUCER]);
-  console.log('state', state);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem(USER));
     if (user) {

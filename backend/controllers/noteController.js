@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 
 // get all notes
 const getNotes = async (req, res) => {
+  const user_id = req.user._id;
   try {
-    const notes = await Note.find({}).sort({ createdAt: -1 });
+    const notes = await Note.find({ user_id }).sort({ createdAt: -1 });
     res.status(200).json(notes);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -48,7 +49,8 @@ const createNote = async (req, res) => {
   }
   try {
     // add a document in the database
-    const note = await Note.create({ title, description });
+    const user_id = req.user._id;
+    const note = await Note.create({ title, description, user_id });
     res.status(200).json(note);
   } catch (error) {
     res.status(400).json({ error: error.message });
