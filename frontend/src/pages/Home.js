@@ -10,7 +10,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const notesState = useSelector(state => state[NOTES_REDUCER]);
   const notesList = notesState?.[NOTES_LIST]
-  console.log("notesState", notesState);
   useEffect(() => {
     dispatch(fetchNotesAction());
   }, [dispatch]);

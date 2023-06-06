@@ -1,7 +1,7 @@
 
 import './App.css';
 import {
-  BrowserRouter, Routes, Route, Redirect
+  BrowserRouter, Routes, Route, Redirect, Navigate
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Home from './pages/Home';
@@ -9,11 +9,13 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { useEffect } from 'react';
-import { USER } from './redux/Auth/constants';
+import { AUTH_REDUCER, USER } from './redux/Auth/constants';
 import { setUser } from './redux/Auth/actions';
 
 function App() {
   const dispatch = useDispatch();
+  const state = useSelector(state => state[AUTH_REDUCER]);
+  console.log('state', state);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem(USER));
     if (user) {
@@ -25,9 +27,9 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={state[USER] ? <Home /> : <Navigate to="/login" />} />
+          <Route path="/login" element={!state[USER] ? <Login /> : <Navigate to="/" />} />
+          <Route path="/signup" element={!state[USER] ? <Signup /> : <Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
     </div>
