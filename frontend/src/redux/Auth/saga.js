@@ -5,13 +5,14 @@ import {
 } from './constants';
 import { logoutAction } from './actions';
 import { SET_NOTES_REDUCER_TO_INITIAL_STATE } from '../Note/constants';
+import { BASE_URL } from '../../constants';
 
 
 function* sendUserToLogin(params) {
   const user = params.payload;
   try {
     yield put({ type: SET_LOGIN_LOADING, payload: true });
-    const response = yield fetch('http://localhost:8000/api/user/login', {
+    const response = yield fetch(`${BASE_URL}/api/user/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user)

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../redux/Auth/actions';
 import { USER, AUTH_REDUCER, EMAIL } from '../redux/Auth/constants';
+import style from '../style/Button.module.scss';
+import '../style/Navbar.scss';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -26,8 +28,16 @@ const Navbar = () => {
           {
             !authState?.[USER] && (
               <div>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Signup</Link>
+                <button className={`${style.btn}`}>
+                  <Link to="/login">
+                    Login
+                  </Link>
+                </button>
+                <button className={`${style.btn} ml-1`}>
+                  <Link to="/signup">
+                    Signup
+                  </Link>
+                </button>
               </div>
             )
           }
