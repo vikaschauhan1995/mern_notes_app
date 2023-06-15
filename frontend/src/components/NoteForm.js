@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { NOTE_TITLE, NOTE_DESCRIPTION, NOTES_REDUCER, POST_NOTE_RESPONSE_ERROR } from '../redux/Note/constants';
 import { postNoteAction } from '../redux/Note/actions';
-
+import '../style/NoteForm.scss';
+import style from '../style/Button.module.scss';
 
 const NoteForm = () => {
   const dispatch = useDispatch();
@@ -34,15 +37,29 @@ const NoteForm = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <h3>Add a new note</h3>
+        <Form.Floating className="mb-3">
+          <Form.Control
+            type="text" name={NOTE_TITLE} onChange={handleChange} value={state[NOTE_TITLE]}
+            id="floatingInputTitle"
+            placeholder="title"
+          />
+          <label htmlFor="floatingInputTitle">Title</label>
+        </Form.Floating>
 
-        <label>Title:</label>
-        <input type="text" name={NOTE_TITLE} onChange={handleChange} value={state[NOTE_TITLE]} />
-        <br />
-        <label>Description:</label>
-        <input type="text" name={NOTE_DESCRIPTION} onChange={handleChange} value={state[NOTE_DESCRIPTION]} />
+        <FloatingLabel
+          controlId="floatingTextarea"
+          label="Description"
+          className="mb-1"
+        >
+          <Form.Control as="textarea" placeholder="description" name={NOTE_DESCRIPTION} onChange={handleChange} value={state[NOTE_DESCRIPTION]} />
+        </FloatingLabel>
         {noteReducerState[POST_NOTE_RESPONSE_ERROR] && <p className="text-red">{noteReducerState[POST_NOTE_RESPONSE_ERROR]}</p>}
         <br />
-        <button>Add Note</button>
+        <div className="NoteForm__formFooter">
+          <div>
+            <button className={style.btn}>Add Note</button>
+          </div>
+        </div>
       </form>
     </div>
   )
