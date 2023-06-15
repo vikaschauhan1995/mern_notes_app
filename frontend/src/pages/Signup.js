@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { EMAIL, PASSWORD, AUTH_REDUCER, IS_SIGNUP_LOADING, SIGNUP_ERROR } from '../redux/Auth/constants';
 import { signupAction } from '../redux/Auth/actions';
+import style from '../style/Button.module.scss';
+import '../style/Signup.scss';
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -28,17 +32,36 @@ const Signup = () => {
     }
   }
   return (
-    <div>
-      <h3>Signup</h3>
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <input type="email" name={EMAIL} onChange={handleChange} value={state[EMAIL]} />
-        <br />
-        <label>Password:</label>
-        <input type="password" name={PASSWORD} onChange={handleChange} value={state[PASSWORD]} />
-        <button disabled={authState[IS_SIGNUP_LOADING]}>{authState[IS_SIGNUP_LOADING] ? "Loading..." : "Signup"}</button>
-      </form>
-      {authState[SIGNUP_ERROR] && <div>{authState[SIGNUP_ERROR]}</div>}
+    <div className="conatiner Signup__container">
+      <div className="Signup__innerContainer">
+        <div className="Signup__form_header">
+          <div><h3>Signup</h3></div>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="Login__form_body my-2">
+            <label>Email:</label>
+            <Form.Control
+              type="email" name={EMAIL} onChange={handleChange} value={state[EMAIL]}
+              placeholder="enter email"
+            />
+            <br />
+            <label>Password:</label>
+            <Form.Control
+              type="password" name={PASSWORD} onChange={handleChange} value={state[PASSWORD]}
+              placeholder="password"
+            />
+          </div>
+          <div className="Signup__form_footer">
+            <div>
+              <button className={style.btn} disabled={authState[IS_SIGNUP_LOADING]}>{authState[IS_SIGNUP_LOADING] ? "Loading..." : "Signup"}</button>
+            </div>
+          </div>
+        </form>
+        <div className="my-2" />
+        {authState[SIGNUP_ERROR] && <Alert key="danger" variant="danger">
+          {authState[SIGNUP_ERROR]}
+        </Alert>}
+      </div>
     </div>
   )
 }

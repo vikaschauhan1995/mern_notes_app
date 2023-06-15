@@ -40,14 +40,12 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className="Login__form_body my-2">
             <label>Email:</label>
-            {/* <input type="email" name={EMAIL} onChange={handleChange} value={state[EMAIL]} /> */}
             <Form.Control
               type="email" name={EMAIL} onChange={handleChange} value={state[EMAIL]}
               placeholder="enter email"
             />
             <br />
             <label>Password:</label>
-            {/* <input type="password" name={PASSWORD} onChange={handleChange} value={state[PASSWORD]} /> */}
             <Form.Control
               type="password" name={PASSWORD} onChange={handleChange} value={state[PASSWORD]}
               placeholder="password"
