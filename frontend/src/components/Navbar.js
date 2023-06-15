@@ -21,8 +21,10 @@ const Navbar = () => {
         <nav>
           {authState?.[USER] && (
             <div>
-              <span>{authState?.[USER][EMAIL]}</span>
-              <button onClick={logout}>Logout</button>
+              <code className="font-weight-light">{authState?.[USER][EMAIL]}</code>
+              <button className="btn btn-link" onClick={logout}>
+                Logout
+              </button>
             </div>
           )}
           {

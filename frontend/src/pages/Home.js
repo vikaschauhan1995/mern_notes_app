@@ -25,9 +25,9 @@ const Home = () => {
           <Col xs="12" sm="8" md="8" lg="6">
             <NoteForm />
             {notesState[FETCH_NOTES_ERROR] && <div>{notesState[FETCH_NOTES_ERROR]}</div>}
-            {notesList.length > 0 ? notesList.map((note, index) =>
+            {notesList?.length > 0 ? notesList.map((note, index) =>
               <NoteDetails key={note?._id + index} note={note} />
-            ) : <p>Noting is here</p>}
+            ) : <p className="font-weight-light">Noting is here</p>}
           </Col>
         </Row>
       </Container>
