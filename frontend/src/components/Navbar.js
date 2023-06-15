@@ -14,7 +14,7 @@ const Navbar = () => {
   }
   return (
     <header>
-      <div className="container">
+      <div className="container Navbar__container">
         <Link to="/">
           <h2>Notes</h2>
         </Link>
