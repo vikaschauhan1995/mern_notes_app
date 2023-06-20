@@ -1,6 +1,7 @@
 require('dotenv').config({ path: './.env' });
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const notesRouter = require('./routes/notes.js');
 const userRouter = require('./routes/user.js');
 
@@ -14,6 +15,10 @@ app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
+
+app.use(cors({
+  origin: `${process.env.FRONT_END_URL}`
+}));
 
 // routes
 app.use('/api/notes', notesRouter);

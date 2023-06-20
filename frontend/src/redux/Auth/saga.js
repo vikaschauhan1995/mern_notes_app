@@ -40,7 +40,7 @@ function* signup(params) {
   const user = params.payload;
   try {
     yield put({ type: SET_SIGNUP_LOADING, payload: true });
-    const response = yield fetch('http://localhost:8000/api/user/signup', {
+    const response = yield fetch(`${BASE_URL}/api/user/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user)

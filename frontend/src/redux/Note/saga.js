@@ -3,11 +3,12 @@ import { FETCH_NOTES, SET_NOTES, POST_NOTE, SET_POST_NOTE_ERROR, ADD_NEW_NOTE, D
 import { USER } from '../Auth/constants';
 import { getDataFromLocalStorage } from '../../utils/getDataFromLocalStorage';
 import request from '../../utils/request';
+import { BASE_URL } from '../../constants';
 
 
 function* fetchNotes() {
   try {
-    const response = yield request('GET', 'http://localhost:8000/api/notes/');
+    const response = yield request('GET', `${BASE_URL}/api/notes/`);
     // console.log("response=>>", response);
     const notes = yield response.json();
     if (response?.error) {
@@ -24,7 +25,7 @@ function* fetchNotes() {
 function* postNote(params) {
   try {
     const note = yield params?.payload;
-    const response = yield request('POST', 'http://localhost:8000/api/notes/', note)
+    const response = yield request('POST', `${BASE_URL}/api/notes/`, note)
     const json = yield response.json();
     if (!response?.ok) {
       yield put({ type: SET_POST_NOTE_ERROR, payload: json?.error });
@@ -40,7 +41,7 @@ function* postNote(params) {
 function* deleteNote(params) {
   try {
     const id = params?.payload;
-    const response = yield request('DELETE', `http://localhost:8000/api/notes/${id}`)
+    const response = yield request('DELETE', `${BASE_URL}/api/notes/${id}`)
     const json = yield response.json();
     if (!response?.ok) {
       console.log('There is an error while deleting note');
