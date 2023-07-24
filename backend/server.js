@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: `${process.env.FRONT_END_URL}`
+  origin: [`${process.env.FRONT_END_URL}`, 'http://3.110.94.126:8082/']
 }));
 
 // routes
